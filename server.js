@@ -13,24 +13,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-//routes, next two will be moved to htmlRoutes.js
-app.get("/", function(req, res){
-	res.sendFile(path.join(__dirname, "app/public/home.html"));
-});
+//require routes
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
-// app.use(function(req, res){
-// 	res.sendFile(path.join(__dirname, "app/public/home.html"));
-// });
 
-app.get("/survey", function(req, res){
-	res.sendFile(path.join(__dirname, "app/public/survey.html"));
-});
 
-//routes, next two will be moved to apiRoutes.js
-app.get("/api/friends", function(req, res){
-	var chosen = req.params.friends;
-	console.log(chosen);
-});
 
 
 //starts server to begin listening
